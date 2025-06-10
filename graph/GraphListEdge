@@ -65,5 +65,58 @@ public class GraphListEdge<V, E> {
         this.secVertex = new ArrayList<>();
         this.secEdge = new ArrayList<>();
     }
-}
+
+     public void insertVertex(V data) {
+        if (!searchVertex(data)) {
+            secVertex.add(new VertexObj<>(data, secVertex.size()));
+        }
+    }
+
+    public void insertEdge(V data1, V data2) {
+        VertexObj<V, E> v1 = getVertex(data1);
+        VertexObj<V, E> v2 = getVertex(data2);
+        if (v1 == null || v2 == null) return;
+
+        for (EdgeObj<V, E> edge : secEdge) {
+            if (edge.connects(v1, v2)) return;
+        }
+
+        secEdge.add(new EdgeObj<>(v1, v2, null, secEdge.size()));
+    }
+
+    public boolean searchVertex(V data) {
+        return getVertex(data) != null;
+    }
+
+    public boolean searchEdge(V data1, V data2) {
+        VertexObj<V, E> v1 = getVertex(data1);
+        VertexObj<V, E> v2 = getVertex(data2);
+        if (v1 == null || v2 == null) return false;
+
+        for (EdgeObj<V, E> edge : secEdge) {
+            if (edge.connects(v1, v2)) return true;
+        }
+        return false;
+    }
+
+    private VertexObj<V, E> getVertex(V data) {
+        for (VertexObj<V, E> v : secVertex) {
+            if (v.getInfo().equals(data)) return v;
+        }
+        return null;
+    }
+
+    public void bfs(V start) {
+        VertexObj<V, E> startV = getVertex(start);
+        if (startV == null) return;
+
+        boolean[] visited = new boolean[secVertex.size()];
+        Queue<VertexObj<V, E>> queue = new LinkedList<>();
+
+        visited[startV.position] = true;
+        queue.add(startV);
+
+
+
+
 
