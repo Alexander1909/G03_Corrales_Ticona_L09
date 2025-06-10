@@ -27,4 +27,19 @@ public class JGraphTExample {
         System.out.println("Vertices: " + graph.vertexSet());
         System.out.println("Aristas: " + graph.edgeSet());
 
+        // Camino más corto de A a D
+        DijkstraShortestPath<String, DefaultWeightedEdge> dijkstra = new DijkstraShortestPath<>(graph);
+        GraphPath<String, DefaultWeightedEdge> path = dijkstra.getPath("A", "D");
+        System.out.println("\nCamino más corto de A a D: " + path.getVertexList());
+        System.out.println("Longitud total del camino: " + path.getWeight());
 
+        // Verificar conectividad (solo funciona con grafos no dirigidos)
+        Graph<String, DefaultEdge> simpleGraph = new SimpleGraph<>(DefaultEdge.class);
+        simpleGraph.addVertex("X");
+        simpleGraph.addVertex("Y");
+        simpleGraph.addEdge("X", "Y");
+
+        ConnectivityInspector<String, DefaultEdge> inspector = new ConnectivityInspector<>(simpleGraph);
+        System.out.println("\n¿Es conexo el grafo no dirigido simple? " + inspector.isConnected());
+    }
+}
