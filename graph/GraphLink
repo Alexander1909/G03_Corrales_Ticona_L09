@@ -466,6 +466,32 @@ public void printMatrizAdyacenciaDir() {
     }
 }
 
+//isomorfo
+public boolean esIsomorfo(GraphLink<E> otro) {
+    if (this.listVertex.size() != otro.listVertex.size()) return false;
+    if (this.countEdgesDirigido() != otro.countEdgesDirigido()) return false;
+    return true; // simplificación. Isomorfismo exacto requiere mapeo entre nodos
+}
+
+private int countEdgesDirigido() {
+    int total = 0;
+    for (int i = 0; i < listVertex.size(); i++) {
+        total += listVertex.get(i).listAdj.size();
+    }
+    return total;
+}
+
+
+
+
+//PLano
+
+
+//conexo
+
+
+//Auto 
+
 
 }
 
