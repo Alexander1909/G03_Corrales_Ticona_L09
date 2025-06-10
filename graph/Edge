@@ -1,0 +1,16 @@
+package graph;
+
+public class Edge<E> {
+    public Vertex<E> vertex;
+    public Edge<E> next;
+
+    public Edge(Vertex<E> vertex) {
+        this.vertex = vertex;
+        this.next = null;
+    }
+
+    @Override
+    public String toString() {
+        return vertex.toString();
+    }
+}
