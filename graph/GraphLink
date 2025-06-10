@@ -324,6 +324,28 @@ public boolean esCompleto() {
     return true;
 }
 
+//Formal 
+public void printFormal() {
+    System.out.print("Vértices: ");
+    for (int i = 0; i < listVertex.size(); i++) {
+        System.out.print(listVertex.get(i).getData() + " ");
+    }
+    System.out.println("\nAristas: ");
+    Set<String> mostradas = new HashSet<>();
+    for (int i = 0; i < listVertex.size(); i++) {
+        Vertex<E> v = listVertex.get(i);
+        for (int j = 0; j < v.listAdj.size(); j++) {
+            E origen = v.getData();
+            E destino = v.listAdj.get(j).refDest.getData();
+            String arista = origen + "-" + destino;
+            String aristaInvertida = destino + "-" + origen;
+            if (!mostradas.contains(arista) && !mostradas.contains(aristaInvertida)) {
+                System.out.println("{" + origen + ", " + destino + "}");
+                mostradas.add(arista);
+            }
+        }
+    }
+}
 
 
 
