@@ -78,6 +78,29 @@ public void removeVertex(E data) {
     vertexZ.listAdj.remove(new Edge<>(vertexV));
 }
 
+    //DFS
+    public void dfs(E data) {
+    boolean[] visited = new boolean[listVertex.size()];
+    int startIndex = listVertex.search(new Vertex<>(data));
+    if (startIndex != -1) {
+        dfsRecursive(startIndex, visited);
+    }
+}
+
+private void dfsRecursive(int index, boolean[] visited) {
+    visited[index] = true;
+    Vertex<E> v = listVertex.get(index);
+    System.out.print(v.getData() + " ");
+
+    for (int i = 0; i < v.listAdj.size(); i++) {
+        Edge<E> edge = v.listAdj.get(i);
+        Vertex<E> neighbor = edge.refDest;
+        int neighborIndex = listVertex.search(neighbor);
+        if (!visited[neighborIndex]) {
+            dfsRecursive(neighborIndex, visited);
+        }
+    }
+}
 
 
 
