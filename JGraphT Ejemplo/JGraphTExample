@@ -10,4 +10,10 @@ public class JGraphTExample {
         // Crear un grafo dirigido ponderado
         Graph<String, DefaultWeightedEdge> graph = new DirectedWeightedMultigraph<>(DefaultWeightedEdge.class);
 
+        // Agregar vértices
+        graph.addVertex("A");
+        graph.addVertex("B");
+        graph.addVertex("C");
+        graph.addVertex("D");
+
 
