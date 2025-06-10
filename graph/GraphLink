@@ -176,6 +176,25 @@ public ArrayList<E> bfsPath(E start, E end) {
 }
 
 
+//  insertEdgeWeight
+public void insertEdgeWeight(E v, E z, int w) {
+    insertVertex(v);
+    insertVertex(z);
+
+    int posV = listVertex.search(new Vertex<>(v));
+    int posZ = listVertex.search(new Vertex<>(z));
+
+    Vertex<E> vertexV = listVertex.get(posV);
+    Vertex<E> vertexZ = listVertex.get(posZ);
+
+    if (vertexV.listAdj.search(new Edge<>(vertexZ)) == -1) {
+        vertexV.listAdj.insertLast(new Edge<>(vertexZ, w));
+    }
+    if (vertexZ.listAdj.search(new Edge<>(vertexV)) == -1) {
+        vertexZ.listAdj.insertLast(new Edge<>(vertexV, w));
+    }
+}
+
 
 
 }
