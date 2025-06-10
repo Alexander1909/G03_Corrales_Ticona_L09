@@ -100,8 +100,40 @@ private void dfsRecursive(int index, boolean[] visited) {
             dfsRecursive(neighborIndex, visited);
         }
     }
+
 }
 
+    //BFS
+public void bfs(E v) {
+    boolean[] visited = new boolean[listVertex.size()];
+    Queue<Vertex<E>> queue = new LinkedList<>();
+
+    int startIndex = listVertex.search(new Vertex<>(v));
+    if (startIndex == -1) return;
+
+    Vertex<E> start = listVertex.get(startIndex);
+    visited[startIndex] = true;
+    queue.add(start);
+
+    while (!queue.isEmpty()) {
+        Vertex<E> current = queue.poll();
+        System.out.print(current.getData() + " ");
+
+        for (int i = 0; i < current.listAdj.size(); i++) {
+            Vertex<E> neighbor = current.listAdj.get(i).refDest;
+            int neighborIndex = listVertex.search(neighbor);
+            if (!visited[neighborIndex]) {
+                visited[neighborIndex] = true;
+                queue.add(neighbor);
+            }
+        }
+    }
+}
+
+
+
+
+    //BFSPAHT
 
 
 
