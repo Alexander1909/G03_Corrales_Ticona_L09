@@ -172,6 +172,63 @@ public int gradoSalida(E v) {
         }
         return sb.toString();
     }
+
+//Forma dirigido 
+public void printFormalDir() {
+    System.out.print("Vértices: ");
+    for (int i = 0; i < listVertex.size(); i++) {
+        System.out.print(listVertex.get(i).getData() + " ");
+    }
+    System.out.println("\nAristas dirigidas:");
+    for (int i = 0; i < listVertex.size(); i++) {
+        Vertex<E> v = listVertex.get(i);
+        for (int j = 0; j < v.listAdj.size(); j++) {
+            E origen = v.getData();
+            E destino = v.listAdj.get(j).refDest.getData();
+            System.out.println("(" + origen + " → " + destino + ")");
+        }
+    }
+}
+
+//Adyacente dirigido 
+public void printListaAdyacenciaDir() {
+    for (int i = 0; i < listVertex.size(); i++) {
+        Vertex<E> v = listVertex.get(i);
+        System.out.print(v.getData() + " → ");
+        for (int j = 0; j < v.listAdj.size(); j++) {
+            System.out.print(v.listAdj.get(j).refDest.getData() + " ");
+        }
+        System.out.println();
+    }
+}
+
+//Matriz Adyacente dirigido 
+public void printMatrizAdyacenciaDir() {
+    int n = listVertex.size();
+    int[][] matriz = new int[n][n];
+
+    for (int i = 0; i < n; i++) {
+        Vertex<E> v = listVertex.get(i);
+        for (int j = 0; j < v.listAdj.size(); j++) {
+            Vertex<E> destino = v.listAdj.get(j).refDest;
+            int idx = listVertex.search(destino);
+            matriz[i][idx] = 1;
+        }
+    }
+
+    System.out.print("   ");
+    for (int i = 0; i < n; i++) System.out.print(listVertex.get(i).getData() + " ");
+    System.out.println();
+
+    for (int i = 0; i < n; i++) {
+        System.out.print(listVertex.get(i).getData() + ": ");
+        for (int j = 0; j < n; j++) {
+            System.out.print(matriz[i][j] + " ");
+        }
+        System.out.println();
+    }
+}
+
 }
 
 
