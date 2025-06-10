@@ -115,7 +115,39 @@ public class GraphListEdge<V, E> {
 
         visited[startV.position] = true;
         queue.add(startV);
+        while (!queue.isEmpty()) {
+            VertexObj<V, E> current = queue.poll();
+            System.out.print(current + " ");
 
+            for (EdgeObj<V, E> edge : secEdge) {
+                VertexObj<V, E> neighbor = null;
+                if (edge.endVertex1.equals(current) && !visited[edge.endVertex2.position]) {
+                    neighbor = edge.endVertex2;
+                } else if (edge.endVertex2.equals(current) && !visited[edge.endVertex1.position]) {
+                    neighbor = edge.endVertex1;
+                }
+
+                if (neighbor != null) {
+                    visited[neighbor.position] = true;
+                    queue.add(neighbor);
+                }
+            }
+        }
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder("Vértices:\n");
+        for (VertexObj<V, E> v : secVertex) {
+            sb.append(v).append("\n");
+        }
+        sb.append("Aristas:\n");
+        for (EdgeObj<V, E> e : secEdge) {
+            sb.append(e).append("\n");
+        }
+        return sb.toString();
+    }
+}
 
 
 
