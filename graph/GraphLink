@@ -485,6 +485,11 @@ private int countEdgesDirigido() {
 
 
 //PLano
+public boolean esPlano() {
+    int v = listVertex.size();
+    int e = countEdgesDirigido();
+    return e <= (3 * v - 6);
+}
 
 
 //conexo
