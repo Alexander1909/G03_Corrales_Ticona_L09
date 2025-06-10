@@ -266,6 +266,17 @@ public int gradoNodo(E v) {
     return listVertex.get(pos).listAdj.size();
 }
 
+//esCamino
+public boolean esCamino() {
+    int extremos = 0;
+    for (int i = 0; i < listVertex.size(); i++) {
+        int grado = listVertex.get(i).listAdj.size();
+        if (grado == 1) extremos++;
+        else if (grado != 2) return false;
+    }
+    return extremos == 2;
+}
+
 
 
 
