@@ -11,6 +11,17 @@ public class vertex<E> {
     public E getData() {
         return data;
     }
-    
+
+    public boolean equals(object o){
+        if(o instanceof Vertex<?>){
+            Vertex<E> v = (Vertex<E>)
+        }
+    }
+
+       @Override
+    public String toString() {
+        return data.toString();
+    }
+
 
 }
