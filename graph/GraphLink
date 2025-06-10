@@ -259,6 +259,14 @@ public ArrayList<E> bfsPath(E start, E end) {
     return stack;
 }
 
+//gradoNodo
+public int gradoNodo(E v) {
+    int pos = listVertex.search(new Vertex<>(v));
+    if (pos == -1) return -1;
+    return listVertex.get(pos).listAdj.size();
+}
+
+
 
 
 
