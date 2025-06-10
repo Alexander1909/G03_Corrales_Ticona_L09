@@ -30,5 +30,28 @@ public class GraphLink<E> {
 
     public String toString() {
         return this.listVertex.toString();
+
     }
+    
+    //Search Vertex
+    public boolean searchVertex(E data) {
+    return listVertex.search(new Vertex<>(data)) != -1;
 }
+
+public boolean searchEdge(E v, E z) {
+    int posV = listVertex.search(new Vertex<>(v));
+    if (posV == -1) return false;
+    Vertex<E> vertexV = listVertex.get(posV);
+    return vertexV.listAdj.search(new Edge<>(new Vertex<>(z))) != -1;
+}
+
+//Search Edge
+
+
+
+
+
+
+
+}
+
