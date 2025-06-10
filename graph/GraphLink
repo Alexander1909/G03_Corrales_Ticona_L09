@@ -12,4 +12,23 @@ public class GraphLink<E> {
         }
     }
 
+    public void insertEdge(E verOri, E verDes) {
+        int posOri = listVertex.search(new Vertex<>(verOri));
+        int posDes = listVertex.search(new Vertex<>(verDes));
 
+        if (posOri == -1 || posDes == -1) return;
+
+        Vertex<E> vOri = listVertex.get(posOri);
+        Vertex<E> vDes = listVertex.get(posDes);
+
+        Edge<E> edge1 = new Edge<>(vDes);
+        Edge<E> edge2 = new Edge<>(vOri);
+
+        if (vOri.listAdj.search(edge1) == -1) vOri.listAdj.insertLast(edge1);
+        if (vDes.listAdj.search(edge2) == -1) vDes.listAdj.insertLast(edge2);
+    }
+
+    public String toString() {
+        return this.listVertex.toString();
+    }
+}
