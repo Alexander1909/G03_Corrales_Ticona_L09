@@ -225,7 +225,15 @@ public ArrayList<E> shortPath(E v, E z) {
         }
     }
 
+    ArrayList<E> path = new ArrayList<>();
+    Vertex<E> current = listVertex.get(listVertex.search(new Vertex<>(z)));
+    while (current != null) {
+        path.add(0, current.getData());
+        current = prev.get(current);
+    }
 
+    return path;
+}
 
 
 
