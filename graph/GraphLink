@@ -493,6 +493,15 @@ public boolean esPlano() {
 
 
 //conexo
+public boolean esConexo() {
+    boolean[] visitados = new boolean[listVertex.size()];
+    dfsRecursive(0, visitados);
+
+    for (boolean v : visitados) {
+        if (!v) return false;
+    }
+    return true;
+}
 
 
 //Auto 
