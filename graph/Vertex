@@ -1,0 +1,16 @@
+public class vertex<E> {
+    private E date;
+    protected ListedLinked<Edge<E>> listAdj;
+
+    public vertex(E data){
+        this.data = data;
+        listAdj = new ListedLinked<Edge<E>>();
+
+    }
+
+    public E getData() {
+        return data;
+    }
+    
+
+}
