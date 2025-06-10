@@ -1,0 +1,13 @@
+import org.jgrapht.*;
+import org.jgrapht.graph.*;
+import org.jgrapht.alg.shortestpath.DijkstraShortestPath;
+import org.jgrapht.alg.connectivity.ConnectivityInspector;
+
+import java.util.List;
+
+public class JGraphTExample {
+    public static void main(String[] args) {
+        // Crear un grafo dirigido ponderado
+        Graph<String, DefaultWeightedEdge> graph = new DirectedWeightedMultigraph<>(DefaultWeightedEdge.class);
+
+
