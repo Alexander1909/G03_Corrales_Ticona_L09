@@ -211,6 +211,20 @@ public ArrayList<E> shortPath(E v, E z) {
     Vertex<E> source = listVertex.get(listVertex.search(new Vertex<>(v)));
     dist.put(source, 0);
     pq.add(source);
+    while (!pq.isEmpty()) {
+        Vertex<E> u = pq.poll();
+        for (int i = 0; i < u.listAdj.size(); i++) {
+            Edge<E> edge = u.listAdj.get(i);
+            Vertex<E> neighbor = edge.refDest;
+            int alt = dist.get(u) + edge.weight;
+            if (alt < dist.get(neighbor)) {
+                dist.put(neighbor, alt);
+                prev.put(neighbor, u);
+                pq.add(neighbor);
+            }
+        }
+    }
+
 
 
 
