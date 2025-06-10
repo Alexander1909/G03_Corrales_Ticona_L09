@@ -37,7 +37,7 @@ public class GraphLink<E> {
     public boolean searchVertex(E data) {
     return listVertex.search(new Vertex<>(data)) != -1;
 }
-
+    //search Edge
 public boolean searchEdge(E v, E z) {
     int posV = listVertex.search(new Vertex<>(v));
     if (posV == -1) return false;
@@ -65,8 +65,18 @@ public void removeVertex(E data) {
 }
 
 
-//Search Edge
+//remove Edge
+    public void removeEdge(E v, E z) {
+    int posV = listVertex.search(new Vertex<>(v));
+    int posZ = listVertex.search(new Vertex<>(z));
+    if (posV == -1 || posZ == -1) return;
 
+    Vertex<E> vertexV = listVertex.get(posV);
+    Vertex<E> vertexZ = listVertex.get(posZ);
+
+    vertexV.listAdj.remove(new Edge<>(vertexZ));
+    vertexZ.listAdj.remove(new Edge<>(vertexV));
+}
 
 
 
