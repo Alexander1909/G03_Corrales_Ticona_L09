@@ -247,6 +247,19 @@ public ArrayList<E> bfsPath(E start, E end) {
 }
 
 
+    //Dijktra
+    public Stack<E> Dijkstra(E v, E z) {
+    ArrayList<E> path = shortPath(v, z);
+    if (path == null) return null;
+
+    Stack<E> stack = new Stack<>();
+    for (E elem : path) {
+        stack.push(elem);
+    }
+    return stack;
+}
+
+
 
 
 }
