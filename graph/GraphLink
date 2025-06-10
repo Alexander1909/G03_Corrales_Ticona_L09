@@ -134,6 +134,19 @@ public void bfs(E v) {
 
 
     //BFSPAHT
+public ArrayList<E> bfsPath(E start, E end) {
+    Map<Vertex<E>, Vertex<E>> parent = new HashMap<>();
+    boolean[] visited = new boolean[listVertex.size()];
+    Queue<Vertex<E>> queue = new LinkedList<>();
+
+    int startIndex = listVertex.search(new Vertex<>(start));
+    if (startIndex == -1) return null;
+
+    Vertex<E> startV = listVertex.get(startIndex);
+    visited[startIndex] = true;
+    queue.add(startV);
+
+    
 
 
 
