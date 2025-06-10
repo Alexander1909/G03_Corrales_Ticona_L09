@@ -505,6 +505,30 @@ public boolean esConexo() {
 
 
 //Auto 
+public GraphLink<E> complementoDirigido() {
+    GraphLink<E> comp = new GraphLink<>();
+    for (int i = 0; i < listVertex.size(); i++) {
+        comp.insertVertex(listVertex.get(i).getData());
+    }
+
+    for (int i = 0; i < listVertex.size(); i++) {
+        for (int j = 0; j < listVertex.size(); j++) {
+            if (i == j) continue;
+            E v1 = listVertex.get(i).getData();
+            E v2 = listVertex.get(j).getData();
+            if (!this.searchEdge(v1, v2)) {
+                comp.insertEdge(v1, v2); // insertar dirección faltante
+            }
+        }
+    }
+
+    return comp;
+}
+
+public boolean esAutoComplementario() {
+    GraphLink<E> comp = this.complementoDirigido();
+    return this.esIsomorfo(comp);
+}
 
 
 }
