@@ -177,62 +177,73 @@ public ArrayList<E> bfsPath(E start, E end) {
 
 
 //  insertEdgeWeight
-public void insertEdgeWeight(E v, E z, int w) {
-    insertVertex(v);
-    insertVertex(z);
+    public void insertEdgeWeight(E v, E z, int w) {
+        insertVertex(v);
+        insertVertex(z);
 
-    int posV = listVertex.search(new Vertex<>(v));
-    int posZ = listVertex.search(new Vertex<>(z));
+        int posV = listVertex.search(new Vertex<>(v));
+        int posZ = listVertex.search(new Vertex<>(z));
 
-    Vertex<E> vertexV = listVertex.get(posV);
-    Vertex<E> vertexZ = listVertex.get(posZ);
+        Vertex<E> vertexV = listVertex.get(posV);
+        Vertex<E> vertexZ = listVertex.get(posZ);
 
-    if (vertexV.listAdj.search(new Edge<>(vertexZ)) == -1) {
-        vertexV.listAdj.insertLast(new Edge<>(vertexZ, w));
-    }
-    if (vertexZ.listAdj.search(new Edge<>(vertexV)) == -1) {
-        vertexZ.listAdj.insertLast(new Edge<>(vertexV, w));
-    }
-}
-
-
-// Shortpath
-public ArrayList<E> shortPath(E v, E z) {
-    Map<Vertex<E>, Integer> dist = new HashMap<>();
-    Map<Vertex<E>, Vertex<E>> prev = new HashMap<>();
-    PriorityQueue<Vertex<E>> pq = new PriorityQueue<>((a, b) -> dist.get(a) - dist.get(b));
-
-    for (int i = 0; i < listVertex.size(); i++) {
-        Vertex<E> u = listVertex.get(i);
-        dist.put(u, Integer.MAX_VALUE);
-        prev.put(u, null);
-    }
-
-    Vertex<E> source = listVertex.get(listVertex.search(new Vertex<>(v)));
-    dist.put(source, 0);
-    pq.add(source);
-    while (!pq.isEmpty()) {
-        Vertex<E> u = pq.poll();
-        for (int i = 0; i < u.listAdj.size(); i++) {
-            Edge<E> edge = u.listAdj.get(i);
-            Vertex<E> neighbor = edge.refDest;
-            int alt = dist.get(u) + edge.weight;
-            if (alt < dist.get(neighbor)) {
-                dist.put(neighbor, alt);
-                prev.put(neighbor, u);
-                pq.add(neighbor);
-            }
+        if (vertexV.listAdj.search(new Edge<>(vertexZ)) == -1) {
+            vertexV.listAdj.insertLast(new Edge<>(vertexZ, w));
+        }
+        if (vertexZ.listAdj.search(new Edge<>(vertexV)) == -1) {
+            vertexZ.listAdj.insertLast(new Edge<>(vertexV, w));
         }
     }
 
-    ArrayList<E> path = new ArrayList<>();
-    Vertex<E> current = listVertex.get(listVertex.search(new Vertex<>(z)));
-    while (current != null) {
-        path.add(0, current.getData());
-        current = prev.get(current);
+
+    // Shortpath
+    public ArrayList<E> shortPath(E v, E z) {
+        Map<Vertex<E>, Integer> dist = new HashMap<>();
+        Map<Vertex<E>, Vertex<E>> prev = new HashMap<>();
+        PriorityQueue<Vertex<E>> pq = new PriorityQueue<>((a, b) -> dist.get(a) - dist.get(b));
+
+        for (int i = 0; i < listVertex.size(); i++) {
+            Vertex<E> u = listVertex.get(i);
+            dist.put(u, Integer.MAX_VALUE);
+            prev.put(u, null);
+        }
+
+        Vertex<E> source = listVertex.get(listVertex.search(new Vertex<>(v)));
+        dist.put(source, 0);
+        pq.add(source);
+        while (!pq.isEmpty()) {
+            Vertex<E> u = pq.poll();
+            for (int i = 0; i < u.listAdj.size(); i++) {
+                Edge<E> edge = u.listAdj.get(i);
+                Vertex<E> neighbor = edge.refDest;
+                int alt = dist.get(u) + edge.weight;
+                if (alt < dist.get(neighbor)) {
+                    dist.put(neighbor, alt);
+                    prev.put(neighbor, u);
+                    pq.add(neighbor);
+                }
+            }
+        }
+
+        ArrayList<E> path = new ArrayList<>();
+        Vertex<E> current = listVertex.get(listVertex.search(new Vertex<>(z)));
+        while (current != null) {
+            path.add(0, current.getData());
+            current = prev.get(current);
+        }
+
+        return path;
     }
 
-    return path;
+    //isConexo
+    public boolean isConexo() {
+    boolean[] visited = new boolean[listVertex.size()];
+    dfsRecursive(0, visited); // desde el primer vértice
+
+    for (boolean v : visited) {
+        if (!v) return false;
+    }
+    return true;
 }
 
 
