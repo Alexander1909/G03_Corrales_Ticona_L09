@@ -314,6 +314,15 @@ public boolean esRueda() {
     return true;
 }
 
+//esCompleto
+public boolean esCompleto() {
+    int n = listVertex.size();
+    for (int i = 0; i < n; i++) {
+        int grado = listVertex.get(i).listAdj.size();
+        if (grado != n - 1) return false;
+    }
+    return true;
+}
 
 
 
