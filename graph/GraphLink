@@ -146,7 +146,34 @@ public ArrayList<E> bfsPath(E start, E end) {
     visited[startIndex] = true;
     queue.add(startV);
 
-    
+    while (!queue.isEmpty()) {
+        Vertex<E> current = queue.poll();
+        if (current.getData().equals(end)) break;
+
+        for (int i = 0; i < current.listAdj.size(); i++) {
+            Vertex<E> neighbor = current.listAdj.get(i).refDest;
+            int neighborIndex = listVertex.search(neighbor);
+            if (!visited[neighborIndex]) {
+                visited[neighborIndex] = true;
+                parent.put(neighbor, current);
+                queue.add(neighbor);
+            }
+        }
+    }
+
+    ArrayList<E> path = new ArrayList<>();
+    Vertex<E> target = new Vertex<>(end);
+    int targetIndex = listVertex.search(target);
+    if (targetIndex == -1 || !parent.containsKey(listVertex.get(targetIndex))) return null;
+
+    Vertex<E> current = listVertex.get(targetIndex);
+    while (current != null && !current.getData().equals(start)) {
+        path.add(0, current.getData());
+        current = parent.get(current);
+    }
+    path.add(0, start);
+    return path;
+}
 
 
 
