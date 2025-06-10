@@ -45,6 +45,26 @@ public boolean searchEdge(E v, E z) {
     return vertexV.listAdj.search(new Edge<>(new Vertex<>(z))) != -1;
 }
 
+//remove vertex
+public void removeVertex(E data) {
+    int pos = listVertex.search(new Vertex<>(data));
+    if (pos == -1) return;
+
+    Vertex<E> v = listVertex.get(pos);
+
+    // Eliminar las aristas de otros nodos que apuntan a este
+    for (int i = 0; i < listVertex.size(); i++) {
+        Vertex<E> current = listVertex.get(i);
+        if (!current.equals(v)) {
+            current.listAdj.remove(new Edge<>(v));
+        }
+    }
+
+    // Eliminar vértice del grafo
+    listVertex.remove(v);
+}
+
+
 //Search Edge
 
 
