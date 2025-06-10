@@ -277,6 +277,16 @@ public boolean esCamino() {
     return extremos == 2;
 }
 
+-//esCiclo
+public boolean esCiclo() {
+    for (int i = 0; i < listVertex.size(); i++) {
+        if (listVertex.get(i).listAdj.size() != 2) return false;
+    }
+    return true;
+}
+
+
+//
 
 
 
