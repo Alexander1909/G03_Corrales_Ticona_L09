@@ -386,6 +386,29 @@ public void printMatrizAdyacencia() {
     }
 }
 
+//GRafo Dirigido 
+public int gradoEntrada(E v) {
+    int count = 0;
+    int idx = listVertex.search(new Vertex<>(v));
+    if (idx == -1) return -1;
+    Vertex<E> target = listVertex.get(idx);
+    for (int i = 0; i < listVertex.size(); i++) {
+        if (i == idx) continue;
+        Vertex<E> source = listVertex.get(i);
+        for (int j = 0; j < source.listAdj.size(); j++) {
+            if (source.listAdj.get(j).refDest.equals(target)) {
+                count++;
+            }
+        }
+    }
+    return count;
+}
+
+public int gradoSalida(E v) {
+    int idx = listVertex.search(new Vertex<>(v));
+    if (idx == -1) return -1;
+    return listVertex.get(idx).listAdj.size();
+}
 
 
 
